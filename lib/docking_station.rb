@@ -1,26 +1,24 @@
 require "./lib/bikes"
 
 class DockingStation
-  
+  attr_reader :docked_bikes
+  # def docked?
+  #   @docked_bikes
+  # end
+
   def initialize
-    @bike_capacity = 0
+    @docked_bikes = []
   end
 
   def release_bike
-    raise "There is no bike available!" if !@docked_bike
-    @docked_bike
+    raise "There is no bike available!" if @docked_bikes.length == 0
+    @docked_bikes.pop
   end
 
   def dock(bike)
-    raise "Bike capacity full!" if @bike_capacity == 1
-    @bike_capacity += 1
-    @docked_bike = bike
+    raise "Bike capacity full!" if @docked_bikes.length >= 20
+    @docked_bikes << bike
   end
 
-  attr_reader :docked_bike
-  # def docked?
-  #   @docked_bike
-  # end
-  
-end
 
+end

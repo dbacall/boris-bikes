@@ -11,7 +11,7 @@ describe DockingStation do
       subject.dock(bike)
       expect(subject.release_bike).to be_instance_of Bike
     end
-    
+
     it "returns true to the working? method" do
       bike = Bike.new
       expect(bike.working?).to eq true
@@ -23,32 +23,29 @@ describe DockingStation do
   end
 
   describe "#dock" do
-    it "stores Bike instances in an instance of DockingStation" do 
+    it "stores Bike instances in an instance of DockingStation" do
       # bike = subject.release_bike
       bike = Bike.new
-      expect(subject.dock(bike)).to eq bike
+      expect(subject.dock(bike)).to eq [bike]
     end
 
-    it "raises an error message if there is already 1 bike docked" do
-      bike1 = Bike.new
-      bike2 = Bike.new
-      subject.dock(bike1)
-      expect { subject.dock(bike2) }.to raise_error("Bike capacity full!")
+    it "raises an error message if the docking station is at full capacity" do
+      station = DockingStation.new
+      expect { 21.times { station.dock(Bike.new) } }.to raise_error("Bike capacity full!")
     end
   end
 
-  describe "#docked_bike" do
-    it "check if the DockingStation has a bike" do 
+  describe "#docked_bikes" do
+    it "check if the DockingStation has a bike" do
       # bike = subject.release_bike
       bike = Bike.new
       subject.dock(bike)
-      expect(subject.docked_bike).to eq bike
+      expect(subject.docked_bikes).to eq [bike]
     end
 
-    it "check if the DockingStation has a bike" do 
-      expect(subject.docked_bike).to eq nil
+    it "check if the DockingStation has a bike" do
+      expect(subject.docked_bikes).to eq []
     end
   end
 
 end
-
