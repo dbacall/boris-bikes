@@ -88,7 +88,7 @@ I'd like vans to collect working bikes from garages and distribute them to docki
 
 ## Running the tests
 
--To run the tests type `rspec` in your terminal and hit enter.
+- To run the tests type `rspec` in your terminal and hit enter.
 
 ## Versioning
 
