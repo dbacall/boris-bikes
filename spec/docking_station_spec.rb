@@ -1,19 +1,16 @@
-require "./lib/docking_station"
+require 'docking_station'
 
 describe DockingStation do
+
+  let(:bike) { double("Bike", broken: true)}
+
   describe "#release_bike" do
     it "responds to 'release_bike' method" do
       expect(subject).to respond_to(:release_bike)
     end
 
-    it "returns an instance of bike" do
-      bike = Bike.new
-      subject.dock(bike)
-      expect(subject.release_bike).to be_instance_of Bike
-    end
-
     it "returns true to the working? method" do
-      bike = Bike.new
+      allow(bike).to receive(:working?).and_return(true)
       expect(bike.working?).to eq true
     end
 
@@ -22,7 +19,6 @@ describe DockingStation do
     end
 
     it "will not release a broken bike" do
-      bike = Bike.new.broken
       subject.dock(bike)
       expect(subject.release_bike).to eq nil
     end
@@ -30,8 +26,6 @@ describe DockingStation do
 
   describe "#dock" do
     it "stores Bike instances in an instance of DockingStation" do
-      # bike = subject.release_bike
-      bike = Bike.new
       expect(subject.dock(bike)).to eq [bike]
     end
 
@@ -49,8 +43,6 @@ describe DockingStation do
 
   describe "#docked_bikes" do
     it "check if the DockingStation has a bike" do
-      # bike = subject.release_bike
-      bike = Bike.new
       subject.dock(bike)
       expect(subject.docked_bikes).to eq [bike]
     end

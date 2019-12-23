@@ -4,9 +4,6 @@ class DockingStation
 
   attr_reader :docked_bikes
   attr_accessor :capacity
-  # def docked?
-  #   @docked_bikes
-  # end
 
   DEFAULT_CAPACITY = 20
 
@@ -18,7 +15,10 @@ class DockingStation
   def release_bike
     raise "There is no bike available!" if empty?
     if @docked_bikes.last.broken
-    @docked_bikes.pop
+      return nil
+    else
+      @docked_bikes.pop
+    end
   end
 
   def dock(bike)
@@ -27,6 +27,7 @@ class DockingStation
   end
 
   private
+
   def empty?
     @docked_bikes.length == 0
   end
